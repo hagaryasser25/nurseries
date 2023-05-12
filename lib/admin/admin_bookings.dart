@@ -129,16 +129,7 @@ class _BookingListState extends State<BookingList> {
                                             fontFamily: 'Cairo'),
                                       ),
                                     ),
-                                    Align(
-                                      alignment: Alignment.topRight,
-                                      child: Text(
-                                        'التاريخ : ${bookingList[index].date.toString()}',
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: 'Cairo'),
-                                      ),
-                                    ),
+                                    
                                     Align(
                                       alignment: Alignment.topRight,
                                       child: Text(

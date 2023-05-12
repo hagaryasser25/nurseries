@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
         Home.routeName: (ctx) => Home(),
         AdminHome.routeName: (ctx) => AdminHome(),
         StoreReplays.routeName: (ctx) => StoreReplays(),
+        OpenScreen.routeName: (ctx) => OpenScreen(),
       },
     );
   }

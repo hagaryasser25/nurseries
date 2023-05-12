@@ -8,6 +8,8 @@ import 'Home/home.dart';
 import 'admin/adminlogin.dart';
 
 class OpenScreen extends StatefulWidget {
+    static const routeName = '/openScreen';
+
   const OpenScreen({Key? key}) : super(key: key);
 
   @override

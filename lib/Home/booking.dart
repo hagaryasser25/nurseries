@@ -4,7 +4,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
 import 'package:nurseries/Home/home.dart';
+import 'dart:ui' as ui;
 
 import '../Models/user_model.dart';
 
@@ -53,7 +55,7 @@ class _BookingState extends State<Booking> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: ui.TextDirection.rtl,
       child: SafeArea(
         child: Scaffold(
           body: Form(
@@ -81,39 +83,37 @@ class _BookingState extends State<Booking> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10),
-                            child: TextFormField(
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "من فضلك ادخل تاريخ الحجز";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (bookdate) {
-                                  _datebook = bookdate!;
-                                },
-                                controller: datebookcon,
-                                style: TextStyle(
-                                    fontFamily: "yel", color: Colors.black),
-                                // controller: addRoomProvider.bednocon,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: new InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                    borderSide: BorderSide(color: Colors.black),
-                                  ),
+                          TextField(
+                            controller: datebookcon,
+                            //editing controller of this TextField
+                            decoration: InputDecoration(
+                                icon: Icon(
+                                    Icons.calendar_today), //icon of text field
+                                labelText: "Enter Date" //label text of field
+                                ),
+                            readOnly: true,
+                            //set it true, so that user will not able to edit text
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1950),
+                                  //DateTime.now() - not to allow to choose before today.
+                                  lastDate: DateTime(2100));
 
-                                  hintText: 'ادخل تاريخ الحجز',
-                                  hintStyle: TextStyle(color: Colors.black),
-                                  labelText: 'تاريخ الحجز',
-                                  labelStyle: TextStyle(color: Colors.black),
-
-                                  //prefixText: ' ',
-                                  //suffixText: 'USD',
-                                  //suffixStyle: const TextStyle(color: Colors.green)),
-                                )),
+                              if (pickedDate != null) {
+                                print(
+                                    pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                String formattedDate =
+                                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                                print(
+                                    formattedDate); //formatted date output using intl package =>  2021-03-16
+                                setState(() {
+                                  datebookcon.text =
+                                      formattedDate; //set output date to TextField value.
+                                });
+                              } else {}
+                            },
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(

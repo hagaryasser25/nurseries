@@ -45,6 +45,8 @@ dependencies:
   latlong2: ^0.8.0
   cherry_toast: ^1.0.9
   hexcolor: ^2.0.1
+  ndialog: ^4.2.3
+  intl: ^0.17.0
   flutter:
     sdk: flutter
 

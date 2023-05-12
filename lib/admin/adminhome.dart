@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nurseries/admin/admin_bookings.dart';
@@ -63,11 +64,10 @@ class _AdminHomeState extends State<AdminHome> {
                           )),
                         ),
                       ),
-
                       InkWell(
-                        onTap: (){
-                          Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => BookingList()));
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BookingList()));
                         },
                         child: Container(
                           height: 50,
@@ -80,7 +80,7 @@ class _AdminHomeState extends State<AdminHome> {
                         ),
                       ),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => AdminComplains()));
                         },
@@ -94,21 +94,24 @@ class _AdminHomeState extends State<AdminHome> {
                           )),
                         ),
                       ),
-
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => OpenScreen()));
+                          FirebaseAuth.instance.signOut();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => OpenScreen()),
+                            (Route<dynamic> route) => false,
+                          );
                         },
                         child: Container(
-                            height: 50,
-                            color: Colors.purple.shade50,
-                            child: const Center(
-                                child: Text(
-                              'خروج',
-                              style: TextStyle(color: Colors.black, fontSize: 25),
-                            )),
-                          ),
+                          height: 50,
+                          color: Colors.purple.shade50,
+                          child: const Center(
+                              child: Text(
+                            'خروج',
+                            style: TextStyle(color: Colors.black, fontSize: 25),
+                          )),
+                        ),
                       ),
                     ],
                   ),
